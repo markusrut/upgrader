@@ -4,8 +4,9 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'package:version/version.dart';
+
 import 'package:http/http.dart' as http;
+import 'package:version/version.dart';
 
 class ITunesSearchAPI {
   /// iTunes Search API documentation URL
@@ -262,6 +263,19 @@ extension ITunesResults on ITunesSearchAPI {
     } catch (e) {
       if (debugLogging) {
         print('upgrader.ITunesResults.version: $e');
+      }
+    }
+    return value;
+  }
+
+  /// Return field currentVersionReleaseDate from iTunes results.
+  String? currentVersionReleaseDate(Map response) {
+    String? value;
+    try {
+      value = response['results'][0]['currentVersionReleaseDate'];
+    } catch (e) {
+      if (debugLogging) {
+        print('upgrader.ITunesResults.currentVersionReleaseDate: $e');
       }
     }
     return value;

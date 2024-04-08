@@ -33,6 +33,7 @@ class UpgraderAppStore extends UpgraderStore {
     bool? isCriticalUpdate;
     Version? minAppVersion;
     String? releaseNotes;
+    DateTime? appStoreVersionReleaseDate;
 
     final iTunes = ITunesSearchAPI();
     iTunes.debugLogging = state.debugLogging;
@@ -61,6 +62,18 @@ class UpgraderAppStore extends UpgraderStore {
           print('upgrader: UpgraderAppStore.minAppVersion: $minAppVersion');
         }
       }
+
+      final releaseDate = iTunes.currentVersionReleaseDate(response);
+      if (releaseDate != null) {
+        try {
+          appStoreVersionReleaseDate = DateTime.parse(releaseDate);
+        } catch (e) {
+          if (state.debugLogging) {
+            print(
+                'upgrader: UpgraderAppStore.appStoreVersionReleaseDate "$releaseDate" exception: $e');
+          }
+        }
+      }
     }
 
     final versionInfo = UpgraderVersionInfo(
@@ -70,6 +83,7 @@ class UpgraderAppStore extends UpgraderStore {
       isCriticalUpdate: isCriticalUpdate,
       minAppVersion: minAppVersion,
       releaseNotes: releaseNotes,
+      appStoreVersionReleaseDate: appStoreVersionReleaseDate,
     );
     if (state.debugLogging) {
       print('upgrader: UpgraderAppStore: version info: $versionInfo');
@@ -96,6 +110,7 @@ class UpgraderPlayStore extends UpgraderStore {
     bool? isCriticalUpdate;
     Version? minAppVersion;
     String? releaseNotes;
+    DateTime? appStoreVersionReleaseDate;
 
     final response =
         await playStore.lookupById(id, country: country, language: language);
@@ -130,6 +145,18 @@ class UpgraderPlayStore extends UpgraderStore {
           }
         }
       }
+
+      final releaseDate = playStore.currentVersionReleaseDate(response);
+      if (releaseDate != null) {
+        try {
+          appStoreVersionReleaseDate = DateTime.parse(releaseDate);
+        } catch (e) {
+          if (state.debugLogging) {
+            print(
+                'upgrader: UpgraderPlayStore.appStoreVersionReleaseDate "$releaseDate" exception: $e');
+          }
+        }
+      }
     }
 
     final versionInfo = UpgraderVersionInfo(
@@ -139,6 +166,7 @@ class UpgraderPlayStore extends UpgraderStore {
       isCriticalUpdate: isCriticalUpdate,
       minAppVersion: minAppVersion,
       releaseNotes: releaseNotes,
+      appStoreVersionReleaseDate: appStoreVersionReleaseDate,
     );
     if (state.debugLogging) {
       print('upgrader: UpgraderPlayStore: version info: $versionInfo');

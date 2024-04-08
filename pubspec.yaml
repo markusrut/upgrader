@@ -38,6 +38,9 @@ dependencies:
   # A dart library for parsing, traversing, querying, transforming and building XML documents.
   xml: ^6.3.0
 
+  # A dart library for internationalization and localization, used to parse formatted dates.
+  intl: '>=0.18.0'
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

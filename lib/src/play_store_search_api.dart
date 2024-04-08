@@ -5,6 +5,7 @@
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:version/version.dart';
 
 class PlayStoreSearchAPI {
@@ -288,5 +289,22 @@ extension PlayStoreResults on PlayStoreSearchAPI {
     }
 
     return version;
+  }
+
+  /// Return field version from Play Store results.
+  String? currentVersionReleaseDate(Document response) {
+    String? value;
+    try {
+      final updatedElements = response.getElementsByClassName('xg1aie');
+      final updatedDate = updatedElements.first.text;
+      value = DateFormat.yMMMd().parse(updatedDate).toString();
+    } catch (e) {
+      if (debugLogging) {
+        print(
+            'upgrader: PlayStoreResults.currentVersionReleaseDate exception: $e');
+      }
+    }
+
+    return value;
   }
 }

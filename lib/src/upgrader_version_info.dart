@@ -9,6 +9,7 @@ class UpgraderVersionInfo {
   final bool? isCriticalUpdate;
   final Version? minAppVersion;
   final String? releaseNotes;
+  final DateTime? appStoreVersionReleaseDate;
 
   UpgraderVersionInfo({
     this.appStoreListingURL,
@@ -17,6 +18,7 @@ class UpgraderVersionInfo {
     this.isCriticalUpdate,
     this.minAppVersion,
     this.releaseNotes,
+    this.appStoreVersionReleaseDate,
   });
 
   @override
@@ -26,6 +28,7 @@ class UpgraderVersionInfo {
         'installedVersion: $installedVersion, '
         'isCriticalUpdate: $isCriticalUpdate, '
         'minAppVersion: $minAppVersion, '
-        'releaseNotes: $releaseNotes';
+        'releaseNotes: $releaseNotes, '
+        'appStoreVersionReleaseDate: $appStoreVersionReleaseDate';
   }
 }
