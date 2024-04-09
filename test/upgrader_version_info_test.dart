@@ -53,6 +53,7 @@ void main() {
       isCriticalUpdate: null,
       minAppVersion: null,
       releaseNotes: null,
+      appStoreVersionReleaseDate: null,
     );
 
     String result = versionInfo.toString();
@@ -60,7 +61,7 @@ void main() {
     expect(
         result,
         equals(
-            'appStoreListingURL: null, appStoreVersion: null, installedVersion: null, isCriticalUpdate: null, minAppVersion: null, releaseNotes: null'));
+            'appStoreListingURL: null, appStoreVersion: null, installedVersion: null, isCriticalUpdate: null, minAppVersion: null, releaseNotes: null, appStoreVersionReleaseDate: null'));
   });
   test('create_instance_with_one_parameter_null', () {
     Version appStoreVersion = Version.parse('1.0.0');
