@@ -39,7 +39,7 @@ dependencies:
   xml: ^6.3.0
 
   # A dart library for internationalization and localization, used to parse formatted dates.
-  intl: '>=0.18.0'
+  intl: '>=0.17.0'
 
 dev_dependencies:
   flutter_test:
