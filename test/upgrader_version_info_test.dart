@@ -13,6 +13,7 @@ void main() {
       isCriticalUpdate: null,
       minAppVersion: null,
       releaseNotes: null,
+      appStoreVersionReleaseDate: null,
     );
 
     expect(versionInfo.appStoreListingURL, isNull);
@@ -21,12 +22,14 @@ void main() {
     expect(versionInfo.isCriticalUpdate, isNull);
     expect(versionInfo.minAppVersion, isNull);
     expect(versionInfo.releaseNotes, isNull);
+    expect(versionInfo.appStoreVersionReleaseDate, isNull);
   });
 
   test('create_instance_with_all_parameters_valid', () {
     Version appStoreVersion = Version.parse('1.0.0');
     Version installedVersion = Version.parse('1.0.0');
     Version minAppVersion = Version.parse('1.0.0');
+    DateTime releaseDate = DateTime.now();
 
     UpgraderVersionInfo versionInfo = UpgraderVersionInfo(
       appStoreListingURL: 'https://example.com',
@@ -35,6 +38,7 @@ void main() {
       isCriticalUpdate: true,
       minAppVersion: minAppVersion,
       releaseNotes: 'New features and bug fixes',
+      appStoreVersionReleaseDate: releaseDate,
     );
 
     expect(versionInfo.appStoreListingURL, equals('https://example.com'));
@@ -43,6 +47,7 @@ void main() {
     expect(versionInfo.isCriticalUpdate, isTrue);
     expect(versionInfo.minAppVersion, equals(minAppVersion));
     expect(versionInfo.releaseNotes, equals('New features and bug fixes'));
+    expect(versionInfo.appStoreVersionReleaseDate, equals(releaseDate));
   });
 
   test('to_string_with_all_parameters_null', () {
@@ -73,6 +78,7 @@ void main() {
       isCriticalUpdate: null,
       minAppVersion: null,
       releaseNotes: null,
+      appStoreVersionReleaseDate: null,
     );
 
     expect(versionInfo.appStoreListingURL, isNull);
@@ -81,6 +87,7 @@ void main() {
     expect(versionInfo.isCriticalUpdate, isNull);
     expect(versionInfo.minAppVersion, isNull);
     expect(versionInfo.releaseNotes, isNull);
+    expect(versionInfo.appStoreVersionReleaseDate, isNull);
   });
 
   test('create_instance_with_valid_version_objects', () {
@@ -95,6 +102,7 @@ void main() {
       isCriticalUpdate: null,
       minAppVersion: minAppVersion,
       releaseNotes: null,
+      appStoreVersionReleaseDate: null,
     );
 
     expect(versionInfo.appStoreListingURL, isNull);
@@ -103,5 +111,6 @@ void main() {
     expect(versionInfo.isCriticalUpdate, isNull);
     expect(versionInfo.minAppVersion, equals(minAppVersion));
     expect(versionInfo.releaseNotes, isNull);
+    expect(versionInfo.appStoreVersionReleaseDate, isNull);
   });
 }
