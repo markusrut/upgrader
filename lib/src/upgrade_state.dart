@@ -20,6 +20,7 @@ class UpgraderState {
     this.debugDisplayOnce = false,
     this.debugLogging = false,
     this.durationUntilAlertAgain = const Duration(days: 3),
+    this.durationUntilAlert,
     this.languageCodeOverride,
     this.messages,
     this.minAppVersion,
@@ -49,6 +50,9 @@ class UpgraderState {
 
   /// Duration until alerting user again.
   final Duration durationUntilAlertAgain;
+
+  /// Duration until alerting user after release is avalible.
+  final Duration? durationUntilAlert;
 
   /// The country code that will override the system locale. Optional. Used
   /// only for Android.

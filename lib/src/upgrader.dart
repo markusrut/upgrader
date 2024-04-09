@@ -52,6 +52,7 @@ class Upgrader with WidgetsBindingObserver {
     bool debugDisplayOnce = false,
     bool debugLogging = false,
     Duration durationUntilAlertAgain = const Duration(days: 3),
+    Duration? durationUntilAlert,
     String? languageCode,
     UpgraderMessages? messages,
     String? minAppVersion,
@@ -67,6 +68,7 @@ class Upgrader with WidgetsBindingObserver {
           debugDisplayOnce: debugDisplayOnce,
           debugLogging: debugLogging,
           durationUntilAlertAgain: durationUntilAlertAgain,
+          durationUntilAlert: durationUntilAlert,
           languageCodeOverride: languageCode,
           messages: messages,
           minAppVersion:
@@ -305,6 +307,8 @@ class Upgrader with WidgetsBindingObserver {
       rv = true;
     } else if (isTooSoon() || alreadyIgnoredThisVersion()) {
       rv = false;
+    } else if (isGracePeriod()) {
+      rv = false;
     }
     if (state.debugLogging) {
       print('upgrader: shouldDisplayUpgrade: $rv');
@@ -335,6 +339,21 @@ class Upgrader with WidgetsBindingObserver {
           print(e);
         }
       }
+    }
+    return rv;
+  }
+
+  bool isGracePeriod() {
+    final versionReleaseDate = versionInfo?.appStoreVersionReleaseDate;
+
+    if (state.durationUntilAlert == null || versionReleaseDate == null) {
+      return false;
+    }
+
+    final timeSinceRelease = DateTime.now().difference(versionReleaseDate);
+    final rv = timeSinceRelease < state.durationUntilAlert!;
+    if (state.debugLogging) {
+      print('upgrader: isGracePeriod: $rv');
     }
     return rv;
   }
